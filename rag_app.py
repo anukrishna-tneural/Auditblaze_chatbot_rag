@@ -4,7 +4,8 @@ from langchain_ollama import OllamaEmbeddings, OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-
+import time
+from utils.logger import log_prompt  # ← make sure this is imported
 from query_handlers import handle_query_intent
 from rag_utils import get_index_from_question, INDEX_FILE_MAP
 
@@ -82,18 +83,47 @@ class SalesRAG:
         return None
 
     def query_handler(self, input_text):
+        start = time.perf_counter()  # ⏱️ Start timing
+
         quick = self.handle_quick(input_text)
         if quick:
+            log_prompt(
+                prompt=input_text,
+                handler="quick",
+                success=True,
+                latency_ms=int((time.perf_counter() - start) * 1000)
+            )
             return quick
 
         try:
             structured_response = handle_query_intent(input_text)
-            if structured_response:  # <-- ADD THIS CHECK
+            if structured_response:
+                log_prompt(
+                    prompt=input_text,
+                    handler="keyword_router",
+                    success=True,
+                    latency_ms=int((time.perf_counter() - start) * 1000)
+                )
                 return structured_response
             else:
-                return self.run_rag_fallback(input_text)
-        except Exception:
+                response = self.run_rag_fallback(input_text)
+                log_prompt(
+                    prompt=input_text,
+                    handler="rag_fallback",
+                    success=True,
+                    latency_ms=int((time.perf_counter() - start) * 1000)
+                )
+                return response
+        except Exception as e:
+            log_prompt(
+                prompt=input_text,
+                handler="exception",
+                success=False,
+                latency_ms=int((time.perf_counter() - start) * 1000),
+                extra={"error": str(e)}
+            )
             return self.run_rag_fallback(input_text)
+
 
 
     # ✅ Add shim for Flask and CLI compatibility

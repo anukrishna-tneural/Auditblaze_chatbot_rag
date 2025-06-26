@@ -1,121 +1,3 @@
-
-
-# from flask import Flask, request, jsonify
-# from flask_cors import CORS
-# import os
-# import sys
-# from rag_app import SalesRAG
-# import logging
-
-# logging.basicConfig(level=logging.INFO)
-# logger = logging.getLogger(__name__)
-
-# app = Flask(__name__)
-# CORS(app)  
-
-# try:
-#     rag_system = SalesRAG()
-#     logger.info("SalesRAG system initialized successfully")
-# except Exception as e:
-#     logger.error(f"Failed to initialize SalesRAG: {e}")
-#     rag_system = None
-
-# @app.route('/health', methods=['GET'])
-# def health_check():
-#     return jsonify({
-#         "status": "healthy",
-#         "rag_system": "initialized" if rag_system else "failed"
-#     })
-
-# @app.route('/query', methods=['POST'])
-# def query_sales():
-#     if not rag_system:
-#         return jsonify({"error": "RAG system not initialized"}), 500
-    
-#     try:
-#         data = request.get_json()
-#         if not data or 'question' not in data:
-#             return jsonify({"error": "Missing 'question' in request body"}), 400
-        
-#         question = data['question']
-#         logger.info(f"Processing query: {question}")
-        
-#         response = rag_system.query(question)
-#         logger.info(f"Bot response: {response} (type: {type(response)})")
-
-        
-#         return jsonify({
-#             "question": question,
-#             "answer": response,
-#             "status": "success"
-#         })
-    
-#     except Exception as e:
-#         logger.error(f"Error processing query: {e}")
-#         return jsonify({"error": str(e)}), 500
-
-# @app.errorhandler(404)
-# def not_found(error):
-#     return jsonify({
-#         "error": "Not found",
-#         "message": "The requested endpoint does not exist",
-#         "available_endpoints": ["/", "/health", "/query", "/chat"]
-#     }), 404
-
-# @app.route('/chat', methods=['POST'])
-# def chat():
-#     if not rag_system:
-#         return jsonify({"error": "RAG system not initialized"}), 500
-    
-#     try:
-#         data = request.get_json()
-#         if not data or 'message' not in data:
-#             return jsonify({"error": "Missing 'message' in request body"}), 400
-        
-#         message = data['message']
-#         logger.info(f"Processing chat message: {message}")
-        
-#         response = rag_system.query(message)
-        
-#         return jsonify({
-#             "user_message": message,
-#             "bot_response": response,
-#             "timestamp": "2024-06-25T12:00:00Z",
-#             "status": "success"
-#         })
-    
-#     except Exception as e:
-#         logger.error(f"Error processing chat: {e}")
-#         return jsonify({"error": str(e)}), 500
-
-# @app.route('/', methods=['GET'])
-# def home():
-#     return jsonify({
-#         "message": "Sales RAG API Server",
-#         "version": "1.0",
-#         "endpoints": {
-#             "/health": "GET - Health check",
-#             "/query": "POST - Query sales data",
-#             "/chat": "POST - Chat interface"
-#         },
-#         "example_usage": {
-#             "query": {
-#                 "method": "POST",
-#                 "url": "/query",
-#                 "body": {"question": "Top 5 products by revenue"}
-#             }
-#         }
-#     })
-
-# if __name__ == '__main__':
-#     port = int(os.environ.get('PORT', 5000))
-#     debug = os.environ.get('DEBUG', 'False').lower() == 'true'
-    
-#     logger.info(f"Starting Flask server on port {port}")
-#     app.run(host='0.0.0.0', port=port, debug=debug)
-
-
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
@@ -213,8 +95,12 @@ def identify_data_sections(lines):
     for line in lines:
         line = line.strip()
         
+        # Skip empty lines
+        if not line:
+            continue
+            
         # Check for section headers (titles with emojis or keywords)
-        if any(keyword in line.lower() for keyword in ['top', 'best', 'highest', 'by revenue', 'by sales', 'by value']):
+        if any(keyword in line.lower() for keyword in ['💰 by revenue', '📦 by quantity', '💰 top by', '📦 top by']):
             # If we have a current section, save it
             if current_section and current_title:
                 sections.append({
@@ -227,7 +113,7 @@ def identify_data_sections(lines):
             current_section = [line]
         
         # Add line to current section if we have one
-        elif current_title:
+        elif current_title and line.startswith('•'):
             current_section.append(line)
     
     # Add the last section
@@ -243,38 +129,42 @@ def identify_data_sections(lines):
 def parse_section_to_chart(section, user_message):
     """
     Parse a single section to create chart data
+    Updated to handle the new response format from query_handlers.py
     """
     title = section['title']
     lines = section['lines']
     
     names = []
     values = []
-    current_name = None
     
     for line in lines:
         line = line.strip()
         
-        # Skip empty lines
-        if not line:
+        # Skip empty lines and section headers
+        if not line or not line.startswith('•'):
             continue
         
-        # Check for numbered entries
-        if re.match(r'^\d+\.\s+', line):
-            current_name = re.sub(r'^\d+\.\s+', '', line).strip()
-            print(f"Debug - Found entry: {current_name}")
+        # Remove bullet point and parse the line
+        line = line.replace('•', '').strip()
         
-        # Look for sales value in the following lines
-        elif current_name and ('Sales Value: AED' in line or 'Revenue: AED' in line):
-            aed_match = re.search(r'AED\s+([\d,]+\.?\d*)', line)
-            if aed_match:
-                try:
-                    value_str = aed_match.group(1).replace(',', '')
-                    value = float(value_str)
-                    names.append(current_name)
-                    values.append(value)
-                    print(f"Debug - Added {current_name}: AED {value}")
-                except ValueError:
-                    continue
+        # Look for patterns like "Name → AED amount, Qty quantity" or "Name → Qty quantity, AED amount"
+        if '→' in line:
+            parts = line.split('→')
+            if len(parts) == 2:
+                name = parts[0].strip()
+                value_part = parts[1].strip()
+                
+                # Extract AED amount
+                aed_match = re.search(r'AED\s+([\d,]+\.?\d*)', value_part)
+                if aed_match:
+                    try:
+                        value_str = aed_match.group(1).replace(',', '')
+                        value = float(value_str)
+                        names.append(name)
+                        values.append(value)
+                        print(f"Debug - Added {name}: AED {value}")
+                    except ValueError:
+                        continue
     
     # Create chart data if we have data
     if names and values:
@@ -282,34 +172,45 @@ def parse_section_to_chart(section, user_message):
         chart_type = determine_chart_type(user_message, title.lower())
         
         # Determine what type of data this is
-        if any(keyword in title.lower() for keyword in ['salesman', 'sales person', 'sales rep']):
+        if any(keyword in title.lower() for keyword in ['salesman', 'sales person', 'sales rep', 'salesmen']):
             category = "salesman"
             colors = ['#4BC0C0', '#FF6384', '#36A2EB', '#FFCE56', '#9966FF']
+            label = "Sales Value (AED)"
         elif any(keyword in title.lower() for keyword in ['customer', 'client']):
             category = "customer" 
             colors = ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF']
-        elif any(keyword in title.lower() for keyword in ['product']):
+            label = "Sales Value (AED)"
+        elif any(keyword in title.lower() for keyword in ['product', 'item']):
             category = "product"
             colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+            label = "Sales Value (AED)"
+        elif any(keyword in title.lower() for keyword in ['supplier', 'vendor']):
+            category = "supplier"
+            colors = ['#9966FF', '#4BC0C0', '#FF6384', '#36A2EB', '#FFCE56']
+            label = "Purchase Value (AED)"
         else:
             category = "general"
             colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+            label = "Value (AED)"
+        
+        # Create the ChartData object
+        from collections import namedtuple
+        ChartData = namedtuple('ChartData', ['type', 'labels', 'datasets', 'title'])
         
         return ChartData(
             type=chart_type,
-            labels=names[:10],
+            labels=names[:10],  # Limit to top 10
             datasets=[{
-                "label": "Sales Value (AED)",
+                "label": label,
                 "data": values[:10],
                 "backgroundColor": colors[:len(names[:10])],
                 "borderColor": '#fff',
                 "borderWidth": 2
             }],
-            title=title.replace('✅', '').strip()  # Clean up title
+            title=title.replace('💰', '').replace('📦', '').strip()  # Clean up title
         )
     
     return None
-
 
 
 

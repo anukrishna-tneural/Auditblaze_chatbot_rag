@@ -1,0 +1,194 @@
+timestamp,prompt,handler,success,latency_ms,extra_info
+2025-06-26T15:08:57.014585,Show top 5 products with highest margin.,keyword_router,True,894,{}
+2025-06-26T15:09:09.179772,What are my most profitable products?,keyword_router,True,846,{}
+2025-06-26T15:09:13.694143,top 5 salesman,keyword_router,True,566,{}
+2025-06-26T15:09:18.408553,top 5 products,keyword_router,True,428,{}
+2025-06-26T15:09:33.876194,Show product-wise profit margins.,keyword_router,True,1910,{}
+2025-06-26T15:09:40.611128,Pending delivery orders for Division 1.,keyword_router,True,428,{}
+2025-06-26T15:10:07.694555,Salesman_123 pending DO summary.,keyword_router,True,409,{}
+2025-06-26T15:10:27.995606,Pending delivery orders for div_0556003793,keyword_router,True,433,{}
+2025-06-26T15:10:44.890879,Pending delivery orders for div_1434764897,keyword_router,True,412,{}
+2025-06-26T15:10:59.080149,Pending delivery orders for div_0556003793,keyword_router,True,456,{}
+2025-06-26T15:19:04.061911,Pending delivery orders for div_0556003793,keyword_router,True,445,{}
+2025-06-26T15:19:24.737819,Pending delivery orders for div_2006915470,keyword_router,True,436,{}
+2025-06-26T15:42:43.138307,"""What is my pending DO to invoice?""	",keyword_router,True,893,{}
+2025-06-26T15:43:01.848106,Pending DOs by salesman,keyword_router,True,1159,{}
+2025-06-26T15:43:26.433457,Show open delivery orders by customer,keyword_router,True,861,{}
+2025-06-26T15:43:41.621114,Pending DOs above 5000,keyword_router,True,913,{}
+2025-06-26T15:44:03.605517,Delivery orders not yet invoiced by man_0864799156.,keyword_router,True,413,{}
+2025-06-26T15:44:53.005536,Top 3 customers for Division 2,keyword_router,True,1127,{}
+2025-06-26T15:45:50.424188,What is my pending DO total?,keyword_router,True,414,{}
+2025-06-26T15:46:51.383015,Pending delivery orders for div_2006915470,keyword_router,True,448,{}
+2025-06-26T15:46:57.767836,Pending delivery orders for div_0556003793,keyword_router,True,412,{}
+2025-06-26T15:47:05.313323,What is my pending DO to invoice?,keyword_router,True,425,{}
+2025-06-26T15:48:06.040953,Top 3 customers for Division 2,keyword_router,True,466,{}
+2025-06-26T15:48:13.875635,Delivery orders not yet invoiced by man_0864799156.,keyword_router,True,454,{}
+2025-06-26T15:48:48.101438,"""What is my pending DO total?""",keyword_router,True,879,{}
+2025-06-26T15:48:57.492639,"""Show total value of open delivery orders""",keyword_router,True,851,{}
+2025-06-26T15:49:02.689078,"""How much pending DO do we have?""",keyword_router,True,588,{}
+2025-06-26T15:49:10.343597,"""Unbilled delivery orders summary""",keyword_router,True,558,{}
+2025-06-26T15:49:10.345048,,keyword_router,True,,{}
+2025-06-26T15:49:16.265262,"""Pending DOs by salesman""",keyword_router,True,462,{}
+2025-06-26T15:49:21.838478,"""Show pending delivery by customer""",keyword_router,True,506,{}
+2025-06-26T15:49:31.243937,Show pending delivery by customer,keyword_router,True,419,{}
+2025-06-26T15:49:46.236477,"""Top 10 customers with pending DOs""",keyword_router,True,938,{}
+2025-06-26T15:49:46.239837,,keyword_router,True,,{}
+2025-06-26T15:49:53.838632,"""Group open DOs by division""",keyword_router,True,413,{}
+2025-06-26T15:49:59.692598,"""Top 3 salesmen for open delivery""",keyword_router,True,,{}
+2025-06-26T15:50:04.109589,"""Top 3 salesmen for open delivery""",keyword_router,True,,{}
+2025-06-26T15:50:21.310860,"""Customer-wise pending DO summary""",keyword_router,True,985,{}
+2025-06-26T15:50:21.315295,,keyword_router,True,,{}
+2025-06-26T15:50:28.950054,"""List all pending DOs above AED 1,000""",keyword_router,True,415,{}
+2025-06-26T15:50:36.350480,"""Pending delivery orders for Division 1""",keyword_router,True,419,{}
+2025-06-26T15:50:46.994225,"""Pending delivery orders for div_1742449716""",keyword_router,True,487,{}
+2025-06-26T15:51:24.970878,Delivery orders above 10000 by man_0864799156 ,keyword_router,True,487,{}
+2025-06-26T15:51:46.662997,Only show DOs for cus_1558551205,keyword_router,True,,{}
+2025-06-26T15:52:15.900467,man_0864799156 pending DO summary,keyword_router,True,408,{}
+2025-06-26T15:52:40.537664,man_1091962667 pending DO summary,keyword_router,True,851,{}
+2025-06-26T15:53:12.498287,man_1205136833 pending do summary,keyword_router,True,411,{}
+2025-06-26T15:53:41.005571,man_1205136833 delivery orders,keyword_router,True,408,{}
+2025-06-26T15:53:54.595455,Pending DOs in May,keyword_router,True,915,{}
+2025-06-26T15:54:02.294925,Pending DOs in jul,keyword_router,True,414,{}
+2025-06-26T15:54:17.763344,Show delivery orders for last 3 months,keyword_router,True,1033,{}
+2025-06-26T15:54:34.753932,Unbilled orders from Jan to Mar,keyword_router,True,1206,{}
+2025-06-26T15:54:50.183222,"""Pending DOs from 2024",keyword_router,True,412,{}
+2025-06-26T15:55:00.144598,"""Orders pending more than 90 days""",keyword_router,True,2,{}
+2025-06-26T15:55:00.153018,,keyword_router,True,,{}
+2025-06-26T15:55:20.742432,"""How many DOs are overdue?""",keyword_router,True,550,{}
+2025-06-26T15:55:28.934929,"""Break down delivery orders by age""",keyword_router,True,492,{}
+2025-06-26T15:55:35.269321,"""Pending DOs over 60 days old""",keyword_router,True,417,{}
+2025-06-26T16:06:11.716371,Pending DOs by salesman,keyword_router,True,533,{}
+2025-06-26T16:06:32.233981,Show pending DOs by customer (top 5)	,keyword_router,True,1110,{}
+2025-06-26T16:06:59.616257,Pending delivery orders for Division 1 (div _2006915470),keyword_router,True,1009,{}
+2025-06-26T16:08:05.426038,What is my pending DO total?	,keyword_router,True,896,{}
+2025-06-26T16:08:13.698814,Pending DOs by salesman (top 5)	,keyword_router,True,897,{}
+2025-06-26T16:09:31.484187,Pending DOs by salesman (top 5)	,keyword_router,True,491,{}
+2025-06-26T16:09:40.172339,Show pending DOs by customer (top 5)	,keyword_router,True,899,{}
+2025-06-26T16:09:50.883649,Pending delivery orders for Division 1 (div _2006915470),keyword_router,True,943,{}
+2025-06-26T16:09:59.567642,DOs pending to invoice in May 2024	,keyword_router,True,964,{}
+2025-06-26T16:10:09.592022,Top 5 customers with pending DOs	,keyword_router,True,419,{}
+2025-06-26T16:10:19.194356,Salesman_123 pending DO summary	,keyword_router,True,1004,{}
+2025-06-26T16:10:38.871898,Which customers have open DOs?	,keyword_router,True,414,{}
+2025-06-26T16:10:55.059988,"List all pending DOs above AED 1,000	",keyword_router,True,1031,{}
+2025-06-26T16:11:16.000063,Pending DOs to be invoiced this month (Jun 202),keyword_router,True,1116,{}
+2025-06-26T16:11:19.977848,Pending DOs to be invoiced this month (Jun 2024),keyword_router,True,473,{}
+2025-06-26T16:13:51.009768,"""Pending DOs in 2024""	",keyword_router,True,1790,{}
+2025-06-26T16:14:18.688397,Salesman_123 pending DO summary,keyword_router,True,1659,{}
+2025-06-26T16:14:37.787598,man_1091962667 pending DO summary,keyword_router,True,648,{}
+2025-06-26T16:14:52.872604,Which customers have open DOs?,keyword_router,True,750,{}
+2025-06-26T16:15:03.354859,"List all pending DOs above AED 1,000 ",keyword_router,True,931,{}
+2025-06-26T16:19:49.553208,man_1091962667 pending DO summary,keyword_router,True,760,{}
+2025-06-26T16:20:21.958361,man_2128340233. pending DO summary,keyword_router,True,575,{}
+2025-06-26T16:20:40.594775,cus_0054571443 pending DO summary,keyword_router,True,845,{}
+2025-06-26T16:21:13.114744,"""Top 5 salesmen with delivery backlog""	",keyword_router,True,1,{}
+2025-06-26T16:21:21.549907,"""Group open DOs by division""	",keyword_router,True,1695,{}
+2025-06-26T16:21:29.646637,"""Show pending delivery by customer""	",keyword_router,True,1677,{}
+2025-06-26T16:21:41.528598,"""Pending DOs by salesman""	",keyword_router,True,689,{}
+2025-06-26T16:21:48.058577,"""How much delivery is pending?""	",keyword_router,True,,{}
+2025-06-26T16:21:56.239218,"""What is my total pending DO?""	",keyword_router,True,636,{}
+2025-06-26T16:22:15.631563,"""man_0864799156 delivery orders above 20000""	",keyword_router,True,730,{}
+2025-06-26T16:22:26.431299,"""Show delivery orders for last 3 months""	",keyword_router,True,1643,{}
+2025-06-26T16:22:33.276525,"""This month's pending deliveries""	",keyword_router,True,,{}
+2025-06-26T16:22:41.858557,"""Pending DOs over 90 days old""	",keyword_router,True,915,{}
+2025-06-26T16:24:34.942732,"""What is my total pending DO?""",keyword_router,True,638,{}
+2025-06-26T16:24:34.945998,,keyword_router,True,1,{}
+2025-06-26T16:24:39.324354,"""What is my total pending DO?""",keyword_router,True,697,{}
+2025-06-26T16:24:47.831662,"""Pending DOs by salesman (top 5)""",keyword_router,True,733,{}
+2025-06-26T16:24:47.834081,,keyword_router,True,,{}
+2025-06-26T16:24:57.249101,"""Group pending DOs by customer""",keyword_router,True,845,{}
+2025-06-26T16:24:57.252016,,keyword_router,True,1,{}
+2025-06-26T16:25:02.333744,,keyword_router,True,,{}
+2025-06-26T16:25:18.683882,"""Group pending DOs by customer""",keyword_router,True,763,{}
+2025-06-26T16:25:18.688446,,keyword_router,True,,{}
+2025-06-26T16:25:27.680503,"""Pending DOs over 60 days""",keyword_router,True,888,{}
+2025-06-26T16:25:27.682732,,keyword_router,True,,{}
+2025-06-26T16:25:27.685037,,keyword_router,True,,{}
+2025-06-26T16:25:36.598281,"""Pending delivery orders in Jan 2024""",keyword_router,True,975,{}
+2025-06-26T16:25:36.601637,,keyword_router,True,,{}
+2025-06-26T16:25:45.202327,"""cus_1073783779 pending DO summary""",keyword_router,True,949,{}
+2025-06-26T16:25:45.204886,,keyword_router,True,,{}
+2025-06-26T16:25:45.207205,,keyword_router,True,,{}
+2025-06-26T16:28:43.756564,pending do in may,keyword_router,True,599,{}
+2025-06-26T16:28:48.385475,pending do in may 2024,keyword_router,True,613,{}
+2025-06-26T16:30:49.790239,Show pending delivery by customer,keyword_router,True,2044,{}
+2025-06-26T16:31:05.779905,Top 5 salesmen with delivery backlog	,keyword_router,True,2,{}
+2025-06-26T16:31:19.931133,What is my pending DO to invoice? (early runs)	,keyword_router,True,1668,{}
+2025-06-26T16:31:30.236134,What is my pending DO to invoice? ,keyword_router,True,815,{}
+2025-06-26T16:31:44.304152,Pending DOs in May 2024	,keyword_router,True,2040,{}
+2025-06-26T16:42:23.115147, Who are my top receivables with aging?,keyword_router,True,2302,{}
+2025-06-26T16:42:35.211042,Show top 10 receivables with age buckets.,keyword_router,True,1450,{}
+2025-06-26T16:42:43.380983,Receivables above 60 days overdue.,keyword_router,True,1479,{}
+2025-06-26T16:42:52.919605,Division-wise receivables summary.,keyword_router,True,1152,{}
+2025-06-26T16:43:01.520384, Receivables due in next 30 days.,keyword_router,True,1047,{}
+2025-06-26T16:43:11.491851,Monthly aging report of receivables,keyword_router,True,1287,{}
+2025-06-26T16:43:20.711028, Breakdown of overdue amounts by party.,keyword_router,True,1398,{}
+2025-06-26T16:52:30.399777,"""Show receivables summary by customer group.""",keyword_router,True,1849,{}
+2025-06-26T16:52:30.404247,,keyword_router,True,1,{}
+2025-06-26T16:52:39.222142,ist customers with zero balance,keyword_router,True,566,{}
+2025-06-26T16:52:42.885434,List customers with zero balance,keyword_router,True,492,{}
+2025-06-26T16:52:48.614635,Highlight receivables with negative balances,quick,True,,{}
+2025-06-26T16:52:56.283332,Get total receivables outstanding.,keyword_router,True,713,{}
+2025-06-26T16:53:01.611802,Receivables aging trend over last 6 months.,keyword_router,True,684,{}
+2025-06-26T16:53:07.319166,Show receivables with upcoming due dates in next 7 days,keyword_router,True,689,{}
+2025-06-26T16:53:14.372474,List receivables with disputes or issues.,keyword_router,True,711,{}
+2025-06-26T16:53:19.467729,"how average days overdue per customer.""",keyword_router,True,806,{}
+2025-06-26T16:53:25.730215,"Show largest single invoice by customer.""",keyword_router,True,616,{}
+2025-06-26T16:53:31.026332,"List receivables written off.""",keyword_router,True,680,{}
+2025-06-26T16:53:37.202363,"ompare receivables vs collections for last quarter.""",keyword_router,True,639,{}
+2025-06-26T16:53:43.825144,"""Show top 5 customers with highest overdue amounts.""",keyword_router,True,643,{}
+2025-06-26T16:57:30.932224,"""Give me division-wise aging summary""",keyword_router,True,970,{}
+2025-06-26T16:57:30.937561,,keyword_router,True,,{}
+2025-06-26T16:57:46.099701,Group data by party.,keyword_router,True,806,{}
+2025-06-26T16:57:46.101772,,keyword_router,True,,{}
+2025-06-26T17:09:39.786184, Show overdue invoices with overdue days > 30,keyword_router,True,1065,{}
+2025-06-26T17:09:48.461689,Show AR aging summary totals by bucket,keyword_router,True,637,{}
+2025-06-26T17:09:55.672459,: Show top 5 pending invoices (non-zero balance),keyword_router,True,,{}
+2025-06-26T17:10:02.846128,Show AR aging summary totals by bucket,keyword_router,True,725,{}
+2025-06-26T17:10:27.407653, Show invoices for a specific party_1131571815,keyword_router,True,628,{}
+2025-06-26T17:10:38.828189, Show invoices for a specific division (example: div_1742449716),keyword_router,True,2,{}
+2025-06-26T17:10:49.254768, Show invoices for a div_1742449716,keyword_router,True,,{}
+2025-06-26T18:40:30.119454,Top 10 Receivables with Aging,keyword_router,True,1616,{}
+2025-06-26T18:40:30.126151,,keyword_router,True,,{}
+2025-06-26T18:40:39.895261,Receivables Above 60 Days Overdue,keyword_router,True,618,{}
+2025-06-26T18:40:39.897950,,keyword_router,True,,{}
+2025-06-26T18:40:40.539898,,keyword_router,True,,{}
+2025-06-26T18:40:49.118301,Division-wise Receivables Summary,keyword_router,True,585,{}
+2025-06-26T18:40:49.120832,,keyword_router,True,,{}
+2025-06-26T18:40:58.412114,Division-wise Receivables Summary,keyword_router,True,597,{}
+2025-06-26T18:40:58.413907,,keyword_router,True,,{}
+2025-06-26T18:41:07.208461,Monthly Aging Report of Receivables,keyword_router,True,639,{}
+2025-06-26T18:41:07.209714,,keyword_router,True,,{}
+2025-06-26T18:41:15.909509,Breakdown of Overdue Amounts by Party,keyword_router,True,578,{}
+2025-06-26T18:41:15.910524,,keyword_router,True,,{}
+2025-06-26T18:41:16.343581,,keyword_router,True,,{}
+2025-06-26T18:41:23.256159,Supplier Aging Report,keyword_router,True,595,{}
+2025-06-26T18:41:23.258806,,keyword_router,True,,{}
+2025-06-26T18:41:28.793588,Top 10 Suppliers with Overdue Payments,keyword_router,True,549,{}
+2025-06-26T18:41:28.795102,,keyword_router,True,,{}
+2025-06-26T18:41:55.545722,Aging Summary of Payables Over 90 Days,keyword_router,True,725,{}
+2025-06-26T18:41:55.547505,,keyword_router,True,,{}
+2025-06-26T18:41:55.548429,,keyword_router,True,,{}
+2025-06-26T18:46:20.615076,3. Suppliers with Outstanding Above AED 10K,keyword_router,True,556,{}
+2025-06-26T18:50:37.726665,Show aging for party_1184468713,keyword_router,True,1186,{}
+2025-06-26T18:50:37.728305,,keyword_router,True,,{}
+2025-06-26T18:50:45.188427,Aging details of customer party_0978313416,keyword_router,True,521,{}
+2025-06-26T18:50:45.190348,,keyword_router,True,,{}
+2025-06-26T18:50:59.315215,Give me a division-wise summary of receivables aging,keyword_router,True,1404,{}
+2025-06-26T18:51:10.869206,AR report by division for this month,keyword_router,True,1493,{}
+2025-06-26T18:51:10.871775,,keyword_router,True,,{}
+2025-06-26T18:51:17.347168,Monthly receivables aging for 2024,keyword_router,True,1251,{}
+2025-06-26T18:51:17.349542,,keyword_router,True,,{}
+2025-06-26T18:51:24.102778,Show monthly aging summary of AR,keyword_router,True,1268,{}
+2025-06-26T18:51:24.106354,,keyword_router,True,,{}
+2025-06-26T18:51:30.443640,Show monthly aging summary of AR,keyword_router,True,1435,{}
+2025-06-26T18:51:30.448023,,keyword_router,True,,{}
+2025-06-26T18:51:36.949188,"List receivables with overdue above 60 days and balance above 100,000",keyword_router,True,1334,{}
+2025-06-26T18:51:36.954119,,keyword_router,True,,{}
+2025-06-26T18:51:44.427686,Show monthly aging summary of AR,keyword_router,True,1320,{}
+2025-06-26T18:51:44.431160,,keyword_router,True,,{}
+2025-06-26T18:51:48.443119,Customers with aging over 90 days,keyword_router,True,584,{}
+2025-06-26T18:51:48.444309,,keyword_router,True,,{}
+2025-06-26T18:51:55.238613,Top 5 customers with receivables,keyword_router,True,537,{}
+2025-06-26T18:51:55.239543,,keyword_router,True,,{}
+2025-06-26T18:52:01.600978,Top receivables customers with aging details,keyword_router,True,584,{}
+2025-06-26T18:52:01.602282,,keyword_router,True,,{}

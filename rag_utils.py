@@ -12,18 +12,18 @@ INDEX_FOLDER_MAP = {
     "sales_data": "sales_data_sample_index",
     "sales_summary": "sales_summary_sample_index",
     "purchase_data": "purchase_data_sample_index",
-    "pending_do": "pending_do_sample_index",
-    "ar_data": "ar_data_sample_index",
-    "ap_data": "ap_data_sample_index"
+    "pending_do": "pending_do_index",
+    "ar_data": "ar_data_index",
+    "ap_data": "ap_data_index"
 }
 
 INDEX_FILE_MAP = {
     "sales_data_sample_index": "sales_data_sample.csv",
     "sales_summary_sample_index": "sales_summary_sample.csv",
     "purchase_data_sample_index": "purchase_data_sample.csv",
-    "pending_do_sample_index": "pending_do_sample.csv",
-    "ar_data_sample_index": "ar_data_sample.csv",
-    "ap_data_sample_index": "ap_data_sample.csv"
+    "pending_do_index": "pending_do.csv",
+    "ar_data_index": "ar_data.csv",
+    "ap_data_index": "ap_data.csv"
 }
 
 def get_index_from_question(question):
