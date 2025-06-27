@@ -192,3 +192,14 @@ timestamp,prompt,handler,success,latency_ms,extra_info
 2025-06-26T18:51:55.239543,,keyword_router,True,,{}
 2025-06-26T18:52:01.600978,Top receivables customers with aging details,keyword_router,True,584,{}
 2025-06-26T18:52:01.602282,,keyword_router,True,,{}
+2025-06-27T04:14:03.571262,what are the sales for last week,keyword_router,True,1251,{}
+2025-06-27T04:22:49.601220,You: what are the sales for last week,keyword_router,True,963,{}
+2025-06-27T04:22:59.162054,what are the sales for last week,keyword_router,True,640,{}
+2025-06-27T04:23:04.910069,what are the sales for Jan,keyword_router,True,761,{}
+2025-06-27T04:26:41.596869,what are the sales for Jan,keyword_router,True,13158,{}
+2025-06-27T04:27:42.001966,what are the sales for jan?,keyword_router,True,655,{}
+2025-06-27T04:27:54.539124,what are the sales for last week?,keyword_router,True,479,{}
+2025-06-27T04:32:26.978945,compare sales and purchases for May,keyword_router,True,1512,{}
+2025-06-27T04:38:06.613952,compare sales and purchases for May,keyword_router,True,1481,{}
+2025-06-27T04:40:06.965987,compare sales and purchases for May,keyword_router,True,1440,{}
+2025-06-27T04:43:43.928770,compare sales and purchases for May,keyword_router,True,1464,{}

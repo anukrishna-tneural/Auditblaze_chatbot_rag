@@ -97,6 +97,8 @@ def apply_date_filter(df, question, default_year: int = DEFAULT_YEAR):
     if 'docdate' not in df.columns:
         return df
 
+    
+
     df['docdate'] = pd.to_datetime(df['docdate'], errors='coerce')
     print("📆 Available months in data:", sorted(df['docdate'].dt.to_period("M").unique().astype(str)))
     q = question.lower()
@@ -104,6 +106,17 @@ def apply_date_filter(df, question, default_year: int = DEFAULT_YEAR):
     # 🔁 Simulate "today" as the end of DEFAULT_YEAR (e.g., 2024-06-30)
     today = datetime(default_year, 6, 30)  # Or whatever fixed "today" you want
     start_of_year = datetime(default_year, 1, 1)
+
+    # ── NEW: “last week” / “last 7 days” ─────────────────────────
+    if re.search(r"last\s+(?:7\s*days|week)", q):
+        start = today - timedelta(days=7)
+        return df[(df['docdate'] >= start) & (df['docdate'] <= today)]
+    
+
+    # ── NEW: “last week” / “last 7 days” ─────────────────────────
+    if re.search(r"last\s+(?:7\s*days|month)", q):
+        start = today - timedelta(days=30)
+        return df[(df['docdate'] >= start) & (df['docdate'] <= today)]
 
     # ── relative ranges ─────────────────────────────────────
     if "last quarter" in q or "quarter" in q:
@@ -310,6 +323,134 @@ def handle_salesmen(df, question, divisions=None, top_n=5):
         question += " revenue and quantity"
 
     return format_dual_ranking(df, "salesman", "salesmen", question, top_n, determine_sort_order(question))
+
+
+# --------------------------------------------------
+# 💸  Simple sales-total handler
+# --------------------------------------------------
+# --------------------------------------------------
+# 💸  Simple sales-total handler (revised)
+# --------------------------------------------------
+def handle_sales_summary(df: pd.DataFrame, question: str) -> str:
+    """
+    Return the grand-total Net Amount for the date / division span
+    implied by *question* (e.g. “last week”, “Jan”, “last 3 months”).
+    """
+    df = df.copy()
+    df.columns = [c.lower().replace(" ", "_") for c in df.columns]
+
+    # 🔁 Normalize net_amount → netamount
+    if "net_amount" in df.columns and "netamount" not in df.columns:
+        df.rename(columns={"net_amount": "netamount"}, inplace=True)
+
+
+    # ensure we have a numeric netamount column
+    if "netamount" not in df.columns:
+        if "amount" in df.columns:
+            df["netamount"] = df["amount"]
+        else:
+            return "❌ Sales file lacks a ‘netamount’ column."
+
+    df["netamount"] = pd.to_numeric(df["netamount"], errors="coerce").fillna(0)
+
+    # optional division & date filters
+    df = apply_division_filter(df, extract_divisions_from_question(question))
+    if isinstance(df, str):                      # error string came back
+        return df
+
+    df = apply_date_filter(df, question)
+    if df.empty:
+        return "⚠️ No sales data for the requested period."
+
+    total = df["netamount"].sum()
+    return f"💰 Sales for the requested period: **AED {total:,.2f}**"
+
+# --------------------------------------------------
+# 📦  Simple purchase-total handler
+# --------------------------------------------------
+def handle_purchase_summary(df: pd.DataFrame, question: str) -> str:
+    """
+    Returns the total Net Amount from purchase data,
+    filtered by division and/or time range from the question.
+    """
+    df = df.copy()
+    df.columns = [c.lower().replace(" ", "_") for c in df.columns]
+
+    # 🔁 Normalize net_amount → netamount
+    if "net_amount" in df.columns and "netamount" not in df.columns:
+        df.rename(columns={"net_amount": "netamount"}, inplace=True)
+
+
+    # ensure we have a numeric netamount
+    if "netamount" not in df.columns:
+        if "amount" in df.columns:
+            df["netamount"] = df["amount"]
+        else:
+            return "❌ Purchase file lacks a ‘netamount’ column."
+
+    df["netamount"] = pd.to_numeric(df["netamount"], errors="coerce").fillna(0)
+
+    df = apply_division_filter(df, extract_divisions_from_question(question))
+    if isinstance(df, str):
+        return df
+
+    df = apply_date_filter(df, question)
+    if df.empty:
+        return "⚠️ No purchase data for the requested period."
+
+    total = df["netamount"].sum()
+    return f"🧾 Purchases for the requested period: **AED {total:,.2f}**"
+
+# --------------------------------------------------
+# 🔁  Compare Sales vs Purchases
+# --------------------------------------------------
+def handle_sales_vs_purchases(question: str) -> str:
+    """
+    Compares total sales and purchases for a given period.
+    """
+    sales_df = load_data_from_index("sales_data_sample_index")
+    purchase_df = load_data_from_index("purchase_data_sample_index")
+
+    for df in [sales_df, purchase_df]:
+        # 1. Normalize column names
+        df.columns = [c.lower().replace(" ", "_") for c in df.columns]
+
+        # 2. Rename net_amount → netamount if needed
+        if "net_amount" in df.columns and "netamount" not in df.columns:
+            df.rename(columns={"net_amount": "netamount"}, inplace=True)
+
+        # 3. Ensure netamount column exists
+        if "netamount" not in df.columns:
+            if "amount" in df.columns:
+                df["netamount"] = df["amount"]
+            else:
+                return "❌ One of the files lacks a ‘netamount’ column."
+
+        # 4. Ensure it's numeric
+        df["netamount"] = pd.to_numeric(df["netamount"], errors="coerce").fillna(0)
+
+    # Apply filters
+    divisions = extract_divisions_from_question(question)
+    sales_df = apply_division_filter(sales_df, divisions)
+    purchase_df = apply_division_filter(purchase_df, divisions)
+
+    sales_df = apply_date_filter(sales_df, question)
+    purchase_df = apply_date_filter(purchase_df, question)
+
+    if sales_df.empty and purchase_df.empty:
+        return "⚠️ No sales or purchase data for the requested period."
+
+    total_sales = sales_df["netamount"].sum()
+    total_purchases = purchase_df["netamount"].sum()
+    diff = total_sales - total_purchases
+    trend = "surplus" if diff >= 0 else "deficit"
+
+    return (
+        f"📊 **Sales vs Purchases** for the requested period:\n\n"
+        f"• 💰 Total Sales: **AED {total_sales:,.2f}**\n"
+        f"• 🧾 Total Purchases: **AED {total_purchases:,.2f}**\n\n"
+        f"➡️ Net {trend}: **AED {abs(diff):,.2f}**"
+    )
 
 
 # --------------------------------------------------
@@ -1137,6 +1278,20 @@ def handle_query_intent(question: str):
         print("✅ Loaded index:", index_name)
         if df.empty:
             return "❌ No data found in the index."
+        
+        if re.search(r"\b(sales?|sold)\b", q) and re.search(r"\b(purchases?|bought)\b", q):
+            return handle_sales_vs_purchases(q)
+        
+        # ── simple “sales total” queries ──────────────────────────
+        if index_name == "sales_data_sample_index" \
+        and re.search(r"\bsales\b", q) \
+        and not re.search(r"\b(product|item|stock|profit|margin|quantity|qty)\b", q):
+            return handle_sales_summary(df, q)
+
+        if index_name == "purchase_data_sample_index" \
+        and re.search(r"\bpurchase(s)?\b", q) \
+        and not re.search(r"\b(product|item|stock|supplier|cost|qty|quantity|price|profit|margin)\b", q):
+            return handle_purchase_summary(df, q)
 
         # ✅ Regex-based routing for document type handlers
         if re.search(r"\b(pending|open)[ _]?do?s?\b|delivery[_ ]?order|do(?:s)? to invoice|do?s? pending to invoice", q):
@@ -1175,6 +1330,8 @@ def handle_query_intent(question: str):
 
         if any(k in q for k in ["salesman", "salesmen", "salesperson"]):
             return handle_salesmen(df, q, divisions, top_n)
+        
+        
 
         # 2️⃣ AR aging queries (run only if the above did not match)
         if any(k in q for k in [
