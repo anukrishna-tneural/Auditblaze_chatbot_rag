@@ -203,3 +203,44 @@ timestamp,prompt,handler,success,latency_ms,extra_info
 2025-06-27T04:38:06.613952,compare sales and purchases for May,keyword_router,True,1481,{}
 2025-06-27T04:40:06.965987,compare sales and purchases for May,keyword_router,True,1440,{}
 2025-06-27T04:43:43.928770,compare sales and purchases for May,keyword_router,True,1464,{}
+2025-06-27T08:05:37.556633,Payables Report for Division 1,keyword_router,True,48252190,{}
+2025-06-27T08:05:37.620607,,keyword_router,True,12,{}
+2025-07-02T06:33:43.595139,top 5 payables,keyword_router,True,103266,{}
+2025-07-02T06:37:47.229954,top 5 payables,keyword_router,True,72491,{}
+2025-07-02T06:38:03.953321,show supplier aeging report,keyword_router,True,461,{}
+2025-07-02T06:40:48.325417,payables report for div_2006915470,keyword_router,True,62954,{}
+2025-07-02T06:42:57.303803,show supplier aeging report div_0097926054,keyword_router,True,928,{}
+2025-07-02T06:43:06.133266,payables report for div_0097926054,keyword_router,True,53489,{}
+2025-07-02T06:48:21.447856,payables for march,keyword_router,True,1370,{}
+2025-07-02T06:48:21.452510,,keyword_router,True,,{}
+2025-07-02T06:48:34.149467,Payables for party_0211250822 in March.,keyword_router,True,457,{}
+2025-07-02T06:54:32.430214, Payables for party_0211250822 in March.,keyword_router,True,509,{}
+2025-07-02T06:54:47.394722, Payables for party_0211250822 ,keyword_router,True,424,{}
+2025-07-02T06:55:45.132185,Payables for party_0211250822  ,keyword_router,True,476,{}
+2025-07-02T06:55:59.768040, Payables for party_0211250822 ,keyword_router,True,445,{}
+2025-07-02T06:56:36.019873, Payables for party_0211250822 ,keyword_router,True,425,{}
+2025-07-02T06:56:39.539055,,keyword_router,True,,{}
+2025-07-02T06:56:45.357424,Payables for party_0211250822  ,keyword_router,True,491,{}
+2025-07-02T07:03:23.703869,Payables for party_0211250822,keyword_router,True,499,{}
+2025-07-02T07:03:23.706143,,keyword_router,True,,{}
+2025-07-02T07:03:44.771670,"grep -rn ""fillna(0)"" .",keyword_router,True,,{}
+2025-07-02T07:03:45.390004,,keyword_router,True,,{}
+2025-07-02T07:05:22.545392,Payables for party_0211250822,keyword_router,True,913,{}
+2025-07-02T07:09:26.624402,top 5 payables march,keyword_router,True,453,{}
+2025-07-02T07:12:02.385605,top 5 payables march,keyword_router,True,475,{}
+2025-07-02T07:14:30.969369,Payables for party_0566700901 in March. ,keyword_router,True,512,{}
+2025-07-02T07:15:32.584187,Payables for party_0566700901 in March.,keyword_router,True,1271,{}
+2025-07-02T07:15:32.589520,,keyword_router,True,,{}
+2025-07-02T07:17:01.827346,show top 1 payable,keyword_router,True,42849,{}
+2025-07-02T07:20:48.361727,Payables for party_0566700901 in March,keyword_router,True,624,{}
+2025-07-02T07:20:48.363280,,keyword_router,True,,{}
+2025-07-02T07:22:25.787787,Top 5 Customers,keyword_router,True,490,{}
+2025-07-02T07:22:25.788581,,keyword_router,True,,{}
+2025-07-02T07:22:31.236729,Top 5 Customers,keyword_router,True,356,{}
+2025-07-02T07:24:46.484129,top 5 customers,keyword_router,True,405,{}
+2025-07-02T07:32:52.969385,customers ,keyword_router,True,406,{}
+2025-07-02T07:32:58.244447,top 5 customers,keyword_router,True,367,{}
+2025-07-02T07:33:43.823390,top 5 customers,keyword_router,True,389,{}
+2025-07-02T07:35:49.002554,top 5 customer,keyword_router,True,388,{}
+2025-07-02T07:37:34.126329,top5 customers,keyword_router,True,398,{}
+2025-07-02T07:38:30.942331,top5 customers,keyword_router,True,430,{}

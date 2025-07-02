@@ -296,19 +296,46 @@ def handle_sales_products(df, question, divisions=None, top_n=5):
     return format_dual_ranking(df, "stockdescription", "products", question, top_n, determine_sort_order(question))
 
 def handle_customers(df, question, divisions=None, top_n=5):
+    # Normalize column names
     df.columns = [c.lower().replace(" ", "_") for c in df.columns]
 
+    # Map customer-related columns to 'party_name'
+    rename_map = {
+        'customer_name': 'partyname',
+        'cust_name': 'partyname',
+        'client_name': 'partyname',
+        'customer': 'partyname'
+    }
+    for old_col, new_col in rename_map.items():
+        if old_col in df.columns:
+            df.rename(columns={old_col: new_col}, inplace=True)
+            break
+
+    if 'partyname' not in df.columns:
+        return "❌ Required field 'partyname' not found in the sales data."
+
+    # Apply division filter if provided
     df = apply_division_filter(df, divisions)
     if isinstance(df, str): return df
-    df = apply_date_filter(df, question)
-    if df.empty: return "No customer data available."
 
-    # 🩹 Default to both revenue and quantity if not mentioned
+    # Apply date filter based on question context
+    df = apply_date_filter(df, question)
+    if df.empty:
+        return "⚠️ No customer data available for the selected filters."
+
+    # 🩹 If neither revenue nor quantity is mentioned, show both
     if not any(k in question.lower() for k in ["revenue", "amount", "value", "quantity", "qty", "volume"]):
         question += " revenue and quantity"
 
-    return format_dual_ranking(df, "party_name", "customers", question, top_n, determine_sort_order(question))
-
+    # Call dual-ranking formatter with correct positional arguments
+    return format_dual_ranking(
+        df,
+        "partyname",                # group_field
+        "customers",                 # result_label
+        question,
+        top_n,
+        determine_sort_order(question)  # asc = True/False
+    )
 
 
 def handle_salesmen(df, question, divisions=None, top_n=5):
@@ -483,7 +510,7 @@ def handle_top_suppliers(df, question: str, top_n: int = 5):
     df['quantity'] = pd.to_numeric(df.get('quantity', 0), errors='coerce')
 
     if 'docdate' in df.columns:
-        df['docdate'] = pd.to_datetime(df['docdate'], errors='coerce')
+        df['docdate'] = pd.to_datetime(df['doc_date'], errors='coerce')
         df = apply_date_filter(df, question)
 
     # Optional filters: brand, division
@@ -1063,16 +1090,18 @@ def handle_payables_with_aging(df: pd.DataFrame, question: str, top_n: int = 10)
     if df.empty: return "⚠️ No AP data for the selected time period."
 
     # ── aging buckets ───────────────────────────────────
+
     aging_cols = [
+
         "days_0_30", "days_31_60", "days_61_90", "days_91_120",
         "days_121_150", "days_151_180", "days_181_210", "above_210"
     ]
-    for c in aging_cols:
-        if c in df.columns:
-            df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
-        else:
-            df[c] = 0  # add missing aging column with 0s
 
+    for c in aging_cols:
+        if c not in df.columns:
+            df[c] = pd.Series([0.0] * len(df))
+            print(f"✅ Aging column initialized: {c}, dtype: {df[c].dtype}")# ✅ ensure column is float and match row count
+        df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0.0)
 
     # ────────────────────────────────────────────────────
     # 1️⃣ PARTY-SPECIFIC
